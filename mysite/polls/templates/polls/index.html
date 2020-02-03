@@ -12,3 +12,11 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+<form action="/polls/suggestions/" method="post">
+    {% csrf_token %}
+    <label for="suggestion_text">Enter name: </label>
+    <input id="suggestion_text" type="text" name="suggestion_text" value="Default name.">
+    {{ form.as_p }} 
+    <input type="submit" value="OK">
+</form>

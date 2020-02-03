@@ -4,7 +4,8 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Choice, Question
+from .models import Choice, Question, Suggestion
+from django import forms
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -15,6 +16,8 @@ class IndexView(generic.ListView):
         return Question.objects.filter(
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')[:5]
+        
+    
 
 class DetailView(generic.DetailView):
     model = Question
@@ -26,12 +29,30 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
+# class SuggestionView(generic.DetailView):
+#     model = Suggestion
+#     # def 
+#     # return(HttpResponse("At suggestions"))
+#     template_name = 'polls.suggestion.html'
+
+def suggestion(request):
+    suggestion_list = Suggestion.objects.all()
+    # response = "You're looking at the suggestions"
+    # return HttpResponse(response)
+    context = {'suggestion_list': suggestion_list,
+    'form': SuggestionForm}
+    return render(request, 'polls/suggestion.html', context)
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
 
-
+class SuggestionForm(forms.ModelForm):
+    class Meta:
+        model = Suggestion
+        fields = ('suggestion_text',)
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -76,3 +97,7 @@ def vote(request, question_id):
 
 
     # return HttpResponse("You're voting on question %s." % question_id)
+
+# def suggest(request):
+#     suggestion = get_object_or_404(Suggestion)
+#     try:
