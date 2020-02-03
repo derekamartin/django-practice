@@ -1,0 +1,24 @@
+<!-- <h1>{{Suggestions}}</h1>
+
+<p>
+    Suggestions
+</p>
+<ul>
+    {% for suggestion in suggestion_set.all %}
+    <li>{{ suggestion.suggestion_text }}</li>
+{% endfor %}
+</ul> -->
+
+
+<table>
+    <tr>
+        <th>Suggestions</th>
+    </tr>
+    {% for item in suggestion_list %}
+    <tr>
+        <td>{{ item.suggestion_text}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
