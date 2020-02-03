@@ -15,8 +15,8 @@
 
 <form action="/polls/suggestions/" method="post">
     {% csrf_token %}
-    <label for="suggestion_text">Enter name: </label>
-    <input id="suggestion_text" type="text" name="suggestion_text" value="Default name.">
+    <label for="suggestion_text">Enter a suggestion for a new poll: </label>
+    <input id="suggestion_text" type="text" name="suggestion_text" value="Suggestion">
     {{ form.as_p }} 
     <input type="submit" value="OK">
 </form>

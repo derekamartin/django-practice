@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
 
-    path('suggestions/', views.suggestion, name='suggestion'),
+    path('suggestions/', views.addSuggestion, name='suggestion'),
     # path('suggestions/', views.SuggestionView.as_view(), name='suggestion'),
 
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),

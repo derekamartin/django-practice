@@ -43,6 +43,20 @@ def suggestion(request):
     'form': SuggestionForm}
     return render(request, 'polls/suggestion.html', context)
 
+def addSuggestion(request):
+    # if(request.method == 'Suggestion'):
+    if request.POST.get('suggestion_text'):
+        new_suggestion = Suggestion()
+        new_suggestion.suggestion_text = request.POST.get('suggestion_text')
+        new_suggestion.save()
+        suggestion_list = Suggestion.objects.all()
+        context = {'suggestion_list': suggestion_list,
+        'form': SuggestionForm}
+
+        return render(request, 'polls/suggestion.html', context)
+    else:
+        return render(request, 'polls/suggestion.html')
+
 
 class ResultsView(generic.DetailView):
     model = Question
